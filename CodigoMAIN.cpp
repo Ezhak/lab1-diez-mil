@@ -2,11 +2,12 @@
 #include <algorithm>
 #include <vector>
 #include <time.h>
-#include <windows.h> 
+#include <Windows.h> 
 #include <stdio.h>
 
 using namespace std;
 
+//DADOS
 void dibujoDado1() {
 	cout << "¦¦¦¦¦¦¦¦¦" << endl;
 	cout << "¦       ¦" << endl;
@@ -56,6 +57,7 @@ void dibujoDado6() {
 	cout << "" << endl;
 }
 
+//JUEGO
 int main()
 {
 	srand(time(NULL)); //rand
