@@ -78,7 +78,7 @@ int main()
 	{
 		if (cont[0] > 2)
 		{
-			if ((cont[0] == 4) or (cont[0] == 5)) tri_amp = true;
+			if ((cont[0] == 4) || (cont[0] == 5)) tri_amp = true;
 			else if (cont[0] == 3) tri = true;
 			else sexteto = true;
 		}
@@ -101,7 +101,7 @@ int main()
 					trio_x = true; 
 					numero = i + 1;
 				}
-				else if ((cont[i] == 4) or (cont[i] == 5)) {
+				else if ((cont[i] == 4) || (cont[i] == 5)) {
 					trio_xx = true; 
 					numero = i + 1;
 				}
@@ -110,8 +110,8 @@ int main()
 
 		if ((tri_par == false) && (sexteto == false)) //chequea si hay juegos de unos o cincos
 		{
-			if ((cont[0] == 1) or (cont[0] == 2)) juego_1 = true;
-			if ((cont[4] == 1) or (cont[4] == 2)) juego_5 = true;
+			if ((cont[0] == 1) || (cont[0] == 2)) juego_1 = true;
+			if ((cont[4] == 1) || (cont[4] == 2)) juego_5 = true;
 		}
 	}
 	
