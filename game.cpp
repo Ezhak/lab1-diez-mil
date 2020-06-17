@@ -1,6 +1,6 @@
 #include "game.h"
 
-void main_menu(std::string* result)
+void main_menu()
 {
     std::cout << "\n██████╗ ██╗███████╗███████╗    ███╗   ███╗██╗██╗";
     std::cout << "\n██╔══██╗██║██╔════╝╚══███╔╝    ████╗ ████║██║██║";
@@ -22,7 +22,7 @@ void main_menu(std::string* result)
 
         switch (gamemode) {
         case 1:
-            play_singleplayer(&result[0], &result[1]);
+            play_singleplayer();
             break;
         case 2:
             // ...
@@ -39,14 +39,19 @@ void main_menu(std::string* result)
     }
 }
 
-void play_singleplayer(std::string* winner, std::string* turns)
+void play_singleplayer()
 {
-    std::string name;
+    std::string player1;
+    int turns;
+
     system("cls");
     std::cout << "Nombre del jugador: ";
-    std::cin >> name;
+    std::cin >> player1;
 
-    *winner = name;
-    *turns = std::to_string(666);
+    turns = 666;
+
+    std::cout << "\nJugador: " << player1;
+    std::cout << "\nTurnos: " << turns;
+    std::cout << "\n";
 }
 

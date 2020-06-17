@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <string>
 
-void main_menu(std::string*);
+void main_menu();
 
-void play_singleplayer(std::string*, std::string*);
+void play_singleplayer();
 
 #endif // GAME_H
 
