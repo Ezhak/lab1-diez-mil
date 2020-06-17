@@ -35,7 +35,7 @@ int main()
 	bool sexteto = false; //Seis unos
 	bool tri_amp = false; //Cuatro o cinco unos
 	bool tri = false; //Tres unos
-	bool tri_par = true; //Tres pares
+	bool tri_par = false; //Tres pares
 	bool juego_1 = false; //uno o dos unos
 	bool juego_5 = false; //uno o dos cinco
 	bool trio_x = false; //tres de un numero
@@ -85,6 +85,7 @@ int main()
 
 		if ((tri == false) && (tri_amp == false) && (sexteto == false))
 		{
+			tri_par = true;
 			for (auto n : cont) //chequea si hay triple par (si no hay ninguno de los trios o sextetos)
 			{
 				if (n % 2 != 0)
