@@ -2,8 +2,6 @@
 #include <algorithm>
 #include <vector>
 #include <time.h>
-#include <windows.h> 
-#include <stdio.h>
 
 using namespace std;
 
@@ -155,40 +153,43 @@ void dibujoDado6() {
 
 int main()
 {
-	srand(time(NULL)); //rand
-	vector<int> dados; //tiro de dados
-	vector<int> cont; //contador de numeros
-	for (int i = 0; i < 6; i++) //carga el tiro de dados (vector)
-	{
-		dados.push_back(rand() % 6 + 1); //numeros random del 1 al 6
-	}
+	srand(time(NULL));  // Init randomizer
+	vector<int> dices;  // Tiro de dados
+	vector<int> times;  // Contador de repeticiones
+
+    // Carga el tiro de dados (vector)
+    // con números al azar entre 1 y 6
+	for (int i = 0; i < 6; i++)
+		dices.push_back(rand() % 6 + 1);
+
+    // Cuenta repeticiones del número 'x' en el tiro
 	for (int x = 1; x <= 6; x++)
-	{
-		int count_x = count(dados.begin(), dados.end(), x); //cuenta cuantas veces aparece un numero(x) en el tiro
-		cont.push_back(count_x);
-	}
+		times.push_back(count(dices.begin(), dices.end(), x));
 
-	//Combinaciones especiales
-	bool sexteto = false; //Seis unos
-	bool tri_amp = false; //Cuatro o cinco unos
-	bool tri = false; //Tres unos
-	bool tri_par = false; //Tres pares
-	bool juego_1 = false; //uno o dos unos
-	bool juego_5 = false; //uno o dos cinco
-	bool trio_x = false; //tres de un numero
-	bool trio_xx = false; //cuatro o cinco de un numero
-	int escalera_larga = 0; //una escalera de numeros (1-6)
-	//Puntajes
-	int puntaje_total = 0;
-	int puntaje_partida = 0;
-	bool ganador_sex = false;
-	//aux
-	int numero;
+	// Combinaciones ganadoras
+	bool game_1 = false;        // Uno o dos 1 (100 por cada uno)
+	bool game_5 = false;        // uno o dos 5 (50 por cada uno)
+	bool trio = false;          // Tres 1 (1000)
+	bool trio_x = false;        // Tres iguales (X*100)
+	bool trio_xplus = false;    // Cuatro o cinco iguales (X*200)
+	bool trio_ext = false;      // Cuatro o cinco unos (2000)
+	bool triple_par = false;    // Tres pares (1000)
+	int long_ladder = 0;        // Escalera de 6 dados (1500)
+	bool sextet = false;        // Seis unos (gana)
 
-	for (auto n : cont) //chequea si el tiro es una escalera larga
-	{
-		if (n == 1) escalera_larga++;
-		else break;
+	// Puntajes
+	int total_score = 0;
+	bool sextet_win = false;
+
+    // Aux
+	int number;
+
+   // Chequea si el tiro es una escalera larga
+	for (auto n : times) {
+		if (n == 1)
+            long_ladder++;
+		else
+            break;
 	}
 
 	for (int i = 0; i < 6; i++)
@@ -211,132 +212,129 @@ int main()
 		}
 	}
 
-	if (escalera_larga != 6) //chequea por trio, trio ampliado o un sexteto (si es que no hay una escalera)
-	{
-		if (cont[0] > 2)
-		{
-			if ((cont[0] == 4) || (cont[0] == 5)) tri_amp = true;
-			else if (cont[0] == 3) tri = true;
-			else sexteto = true;
+    // Chequea por trio, trio ampliado o un sexteto (si es que no hay una escalera)
+	if (long_ladder != 6) {
+		if (times[0] > 2) {
+			if ((times[0] == 4) || (times[0] == 5))
+                trio_ext = true;
+			else if (times[0] == 3)
+                trio = true;
+			else
+                sextet = true;
 		}
 
-		if ((tri == false) && (tri_amp == false) && (sexteto == false))
-		{
-			tri_par = true;
-			for (auto n : cont) //chequea si hay triple par (si no hay ninguno de los trios o sextetos)
-			{
-				if (n % 2 != 0)
-				{
-					tri_par = false;
+		if (!trio && !trio_ext && !sextet) {
+			triple_par = true;
+
+            // Chequea si hay triple par (si no hay ninguno de los trios o sextetos)
+			for (auto n : times) {
+				if (n % 2 != 0) {
+					triple_par = false;
 					break;
 				}
 			}
-			for (int i = 1; i < 6; i++) //chequea si hay un trio o un trio++
-			{
-				if (cont[i] == 3) 
-				{
+
+            // Chequea si hay un trio o un trio++
+			for (int i = 1; i < 6; i++) {
+				if (times[i] == 3) {
 					trio_x = true; 
-					numero = i + 1;
+					number = i + 1;
 				}
-				else if ((cont[i] == 4) || (cont[i] == 5)) {
-					trio_xx = true; 
-					numero = i + 1;
+
+				else if ((times[i] == 4) || (times[i] == 5)) {
+					trio_xplus = true; 
+					number = i + 1;
 				}
 			}
 		}
 
-		if ((tri_par == false) && (sexteto == false)) //chequea si hay juegos de unos o cincos
-		{
-			if ((cont[0] == 1) || (cont[0] == 2)) juego_1 = true;
-			if ((cont[4] == 1) || (cont[4] == 2)) juego_5 = true;
+        // Chequea si hay juego de unos o cincos
+		if ( !triple_par && !sextet ) {
+			if ((times[0] == 1) || (times[0] == 2))
+                game_1 = true;
+			if ((times[4] == 1) || (times[4] == 2))
+                game_5 = true;
 		}
 	}
 	
-	//Puntajes
+	// Puntajes
+	if (sextet)
+        sextet_win = true;
 
-	if (sexteto == true) ganador_sex = true;
 	else {
-		vector<int> puntaje; //para chequear cual es el puntaje mas grande;
-		if (tri_amp == true) 
-		{ 
-			puntaje.push_back(2000); 
-			cout << "Conseguiste un trio ampliado! +2000\n";
+		vector<int> partial_scores; // Para chequear cual es el puntaje mas grande
+		if (trio_ext) { 
+			partial_scores.push_back(2000); 
+			cout << "Conseguiste un trío ampliado! +2000\n";
 		}
-		else if (escalera_larga == 6) 
-		{ 
-			puntaje.push_back(1500); 
+
+		else if (long_ladder == 6) { 
+			partial_scores.push_back(1500); 
 			cout << "Conseguiste una escalera larga! +1500\n";
 		}
-		else if (tri_par == true) 
-		{ 
-			puntaje.push_back(1000); 
+
+		else if (triple_par) { 
+			partial_scores.push_back(1000); 
 			cout << "Conseguiste un triple par! +1000\n";
 		}
-		else if (trio_xx == true) 
-		{ 
-			puntaje.push_back(numero * 200); 
-			cout << "Conseguiste un trio ampliado de " << numero << "! +" << numero * 200 << "\n";
-			if (juego_1 == true)
-			{
-				puntaje.push_back(cont[0] * 100);
+
+		else if (trio_xplus) { 
+			partial_scores.push_back(number * 200); 
+			cout << "Conseguiste un trío ampliado de " << number << "! +" << number * 200 << "\n";
+			if (game_1) {
+				partial_scores.push_back(times[0] * 100);
+				cout << "También conseguiste un juego de unos! Pero estos puntos no se cuentan." << "\n";
+			}
+			if (game_5) {
+				partial_scores.push_back(times[4] * 50);
+				cout << "También conseguiste un juego de cincos! Pero estos puntos no se cuentan." << "\n";
+			}
+		}
+
+		else if (trio) {
+			partial_scores.push_back(1000);
+			cout << "Conseguiste un trío! +1000\n";
+			if (game_1) {
+				partial_scores.push_back(times[0] * 100);
+				cout << "También conseguiste un juego de unos! Pero estos puntos no se cuentan." << "\n";
+			}
+			if (game_5) {
+				partial_scores.push_back(times[4] * 50);
+				cout << "También conseguiste un juego de cincos! Pero estos puntos no se cuentan." << "\n";
+			}
+		}
+
+		else if (trio_x) { 
+			partial_scores.push_back(number * 100); 
+			cout << "Conseguiste un trío de " << number << "! +" << number * 100 << "\n";
+			if (game_1) {
+				partial_scores.push_back(times[0] * 100);
 				cout << "Tambien conseguiste un juego de unos! Pero estos puntos no se cuentan." << "\n";
 			}
-			if (juego_5 == true)
-			{
-				puntaje.push_back(cont[4] * 50);
+			if (game_5) {
+				partial_scores.push_back(times[4] * 50);
 				cout << "Tambien conseguiste un juego de cincos! Pero estos puntos no se cuentan." << "\n";
 			}
 		}
-		else if (tri == true)
-		{
-			puntaje.push_back(1000);
-			cout << "Conseguite un trio! +1000\n";
-			if (juego_1 == true)
-			{
-				puntaje.push_back(cont[0] * 100);
-				cout << "Tambien conseguiste un juego de unos! Pero estos puntos no se cuentan." << "\n";
-			}
-			if (juego_5 == true)
-			{
-				puntaje.push_back(cont[4] * 50);
-				cout << "Tambien conseguiste un juego de cincos! Pero estos puntos no se cuentan." << "\n";
-			}
+
+		else if (game_1) {
+			partial_scores.push_back(times[0] * 100);
+			cout << "Conseguiste un juego de unos! +" << times[0] * 100 << "\n";
 		}
-		else if (trio_x == true) 
-		{ 
-			puntaje.push_back(numero * 100); 
-			cout << "Conseguiste un trio de " << numero << "! +" << numero * 100 << "\n";
-			if (juego_1 == true)
-			{
-				puntaje.push_back(cont[0] * 100);
-				cout << "Tambien conseguiste un juego de unos! Pero estos puntos no se cuentan." << "\n";
-			}
-			if (juego_5 == true)
-			{
-				puntaje.push_back(cont[4] * 50);
-				cout << "Tambien conseguiste un juego de cincos! Pero estos puntos no se cuentan." << "\n";
-			}
+
+		else if (game_5) {
+			partial_scores.push_back(times[4] * 50);
+			cout << "Conseguiste un juego de cincos! +" << times[4] * 50 << "\n";
 		}
-		else if (juego_1 == true)
-		{
-			puntaje.push_back(cont[0] * 100);
-			cout << "Conseguiste un juego de unos! +" << cont[0] * 100 << "\n";
-		}
-		else if (juego_5 == true)
-		{
-			puntaje.push_back(cont[4] * 50);
-			cout << "Conseguiste un juego de cincos! +" << cont[4] * 50 << "\n";
-		}
-		else 
-		{
+
+		else {
 			cout << "No conseguiste ninguna combinacion.\n";
 			for (auto x : dados) { cout << x; }
 			return 0;
 		}
-		
-		if (ganador_sex == true) 
-		{
-			cout << "TE SALIO UN SEXTETO!!!" << endl << endl << endl; //Completar acá <---
+
+		if (sextet_win) {
+			cout << "TE SALIÓ UN SEXTETO!!!" << endl << endl << endl;
 			cout << "██╗    ██╗██╗███╗   ██╗███╗   ██╗███████╗██████╗" << endl;
 			cout << "██║    ██║██║████╗  ██║████╗  ██║██╔════╝██╔══██╗" << endl;
 			cout << "██║ █╗ ██║██║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝" << endl;
@@ -344,14 +342,16 @@ int main()
 			cout << "╚███╔███╔╝██║██║ ╚████║██║ ╚████║███████╗██║  ██║" << endl;
 			cout << "╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝" << endl;
 		}
-		else
-		{
-			sort(puntaje.begin(), puntaje.end());
-			puntaje_partida += puntaje[(puntaje.size() - 1)];
 
-			for (auto x : dados) { cout << x; }
+		else {
+			sort(partial_scores.begin(), partial_scores.end());
+			total_score += partial_scores[(partial_scores.size() - 1)];
+
+			for (auto x : dados)
+                cout << x;
+
 			cout << endl;
-			cout << puntaje_partida;
+			cout << total_score;
 		}
 	}
 }
