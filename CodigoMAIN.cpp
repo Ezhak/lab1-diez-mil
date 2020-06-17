@@ -179,6 +179,4 @@ int main()
 			cout << puntaje_partida;
 		}
 	}
-	//error_1: cuando aparece un tiro asi: 141151, detecta el 1000 del triple par, pero no el 2000 del trio ampliado.
-	//error_2: 351116 detecta el 5 pero no detecta el trio.
 }
