@@ -7,150 +7,53 @@
 
 using namespace std;
 
-void gotoxy(int x, int y) {
-	HANDLE hcon;
-	hcon = GetStdHandle(STD_OUTPUT_HANDLE);
-	COORD dwPos;
-	dwPos.X = x;
-	dwPos.Y = y;
-	SetConsoleCursorPosition(hcon, dwPos);
-}
-void dibujoDadoGeneral() {
-	//Valor
-	gotoxy(3, 2); printf("%c", 2);
-	gotoxy(3, 3); printf("%c", 2);
-	gotoxy(3, 4); printf("%c", 2);
-	gotoxy(5, 2); printf("%c", 2);
-	gotoxy(5, 3); printf("%c", 2);
-	gotoxy(5, 4); printf("%c", 2);
-	gotoxy(7, 2); printf("%c", 2);
-	gotoxy(7, 3); printf("%c", 2);
-	gotoxy(7, 4); printf("%c", 2);
-	//
-	gotoxy(10, 5);
-}
 void dibujoDado1() {
-	for (int i = 2; i < 9; i++) {
-		gotoxy(i, 1); printf("%c", 220);
-		gotoxy(i, 5); printf("%c", 220);
-	};
-	for (int i = 2; i < 5; i++) {
-		gotoxy(1, i); printf("%c", 219);
-		gotoxy(9, i); printf("%c", 219);
-	};
-	gotoxy(1, 1); printf("%c", 220);
-	gotoxy(1, 5); printf("%c", 219);
-	gotoxy(9, 1); printf("%c", 220);
-	gotoxy(9, 5); printf("%c", 219);
-	//Valor
-	gotoxy(5, 3); printf("%c", 2);
-	//
-	gotoxy(10, 5);
+	cout << "¦¦¦¦¦¦¦¦¦" << endl;
+	cout << "¦       ¦" << endl;
+	cout << "¦   o   ¦" << endl;
+	cout << "¦       ¦" << endl;
+	cout << "¦¦¦¦¦¦¦¦¦" << endl;
+	cout << "" << endl;
 }
 void dibujoDado2() {
-	for (int i = 11; i < 19; i++) {
-		gotoxy(i, 1); printf("%c", 220);
-		gotoxy(i, 5); printf("%c", 220);
-	};
-	for (int i = 2; i < 5; i++) {
-		gotoxy(11, i); printf("%c", 219);
-		gotoxy(19, i); printf("%c", 219);
-	};
-	gotoxy(11, 1); printf("%c", 220);
-	gotoxy(11, 5); printf("%c", 219);
-	gotoxy(19, 1); printf("%c", 220);
-	gotoxy(19, 5); printf("%c", 219);
-	// Valor
-	gotoxy(13, 2); printf("%c", 2);
-	gotoxy(17, 4); printf("%c", 2);
-	//
-	gotoxy(10, 5);
+	cout << "¦¦¦¦¦¦¦¦¦" << endl;
+	cout << "¦o      ¦" << endl;
+	cout << "¦       ¦" << endl;
+	cout << "¦      o¦" << endl;
+	cout << "¦¦¦¦¦¦¦¦¦" << endl;
+	cout << "" << endl;
 }
 void dibujoDado3() {
-	for (int i = 21; i < 29; i++) {
-		gotoxy(i, 1); printf("%c", 220);
-		gotoxy(i, 5); printf("%c", 220);
-	};
-	for (int i = 2; i < 5; i++) {
-		gotoxy(21, i); printf("%c", 219);
-		gotoxy(29, i); printf("%c", 219);
-	};
-	gotoxy(21, 1); printf("%c", 220);
-	gotoxy(21, 5); printf("%c", 219);
-	gotoxy(29, 1); printf("%c", 220);
-	gotoxy(29, 5); printf("%c", 219);
-	//Valor
-	gotoxy(25, 3); printf("%c", 2);
-	gotoxy(23, 2); printf("%c", 2);
-	gotoxy(27, 4); printf("%c", 2);
-	//
-	gotoxy(10, 5);
+	cout << "¦¦¦¦¦¦¦¦¦" << endl;
+	cout << "¦o      ¦" << endl;
+	cout << "¦   o   ¦" << endl;
+	cout << "¦      o¦" << endl;
+	cout << "¦¦¦¦¦¦¦¦¦" << endl;
+	cout << "" << endl;
 }
 void dibujoDado4() {
-	for (int i = 31; i < 39; i++) {
-		gotoxy(i, 1); printf("%c", 220);
-		gotoxy(i, 5); printf("%c", 220);
-	};
-	for (int i = 2; i < 5; i++) {
-		gotoxy(31, i); printf("%c", 219);
-		gotoxy(39, i); printf("%c", 219);
-	};
-	gotoxy(31, 1); printf("%c", 220);
-	gotoxy(31, 5); printf("%c", 219);
-	gotoxy(39, 1); printf("%c", 220);
-	gotoxy(39, 5); printf("%c", 219);
-	//Valor
-	gotoxy(33, 2); printf("%c", 2);
-	gotoxy(33, 4); printf("%c", 2);
-	gotoxy(37, 2); printf("%c", 2);
-	gotoxy(37, 4); printf("%c", 2);
-	//
-	gotoxy(10, 5);
+	cout << "¦¦¦¦¦¦¦¦¦" << endl;
+	cout << "¦o     o¦" << endl;
+	cout << "¦       ¦" << endl;
+	cout << "¦o     o¦" << endl;
+	cout << "¦¦¦¦¦¦¦¦¦" << endl;
+	cout << "" << endl;
 }
 void dibujoDado5() {
-	for (int i = 41; i < 49; i++) {
-		gotoxy(i, 1); printf("%c", 220);
-		gotoxy(i, 5); printf("%c", 220);
-	};
-	for (int i = 2; i < 5; i++) {
-		gotoxy(41, i); printf("%c", 219);
-		gotoxy(49, i); printf("%c", 219);
-	};
-	gotoxy(41, 1); printf("%c", 220);
-	gotoxy(41, 5); printf("%c", 219);
-	gotoxy(49, 1); printf("%c", 220);
-	gotoxy(49, 5); printf("%c", 219);
-	//Valor
-	gotoxy(45, 3); printf("%c", 2);
-	gotoxy(43, 2); printf("%c", 2);
-	gotoxy(43, 4); printf("%c", 2);
-	gotoxy(47, 2); printf("%c", 2);
-	gotoxy(47, 4); printf("%c", 2);
-	//
-	gotoxy(10, 5);
+	cout << "¦¦¦¦¦¦¦¦¦" << endl;
+	cout << "¦o     o¦" << endl;
+	cout << "¦   o   ¦" << endl;
+	cout << "¦o     o¦" << endl;
+	cout << "¦¦¦¦¦¦¦¦¦" << endl;
+	cout << "" << endl;
 }
 void dibujoDado6() {
-	for (int i = 51; i < 59; i++) {
-		gotoxy(i, 1); printf("%c", 220);
-		gotoxy(i, 5); printf("%c", 220);
-	};
-	for (int i = 2; i < 5; i++) {
-		gotoxy(51, i); printf("%c", 219);
-		gotoxy(59, i); printf("%c", 219);
-	};
-	gotoxy(51, 1); printf("%c", 220);
-	gotoxy(51, 5); printf("%c", 219);
-	gotoxy(59, 1); printf("%c", 220);
-	gotoxy(59, 5); printf("%c", 219);
-	//Valor
-	gotoxy(53, 2); printf("%c", 2);
-	gotoxy(53, 3); printf("%c", 2);
-	gotoxy(53, 4); printf("%c", 2);
-	gotoxy(57, 2); printf("%c", 2);
-	gotoxy(57, 3); printf("%c", 2);
-	gotoxy(57, 4); printf("%c", 2);
-	//
-	gotoxy(10, 5);
+	cout << "¦¦¦¦¦¦¦¦¦" << endl;
+	cout << "¦o     o¦" << endl;
+	cout << "¦o     o¦" << endl;
+	cout << "¦o     o¦" << endl;
+	cout << "¦¦¦¦¦¦¦¦¦" << endl;
+	cout << "" << endl;
 }
 
 int main()
@@ -195,18 +98,28 @@ int main()
 	{
 		switch (dados[i]) {
 		case 1:
-			gotoxy();
+			dibujoDado1();
+			cout << " " << endl;
 			break;
 		case 2:
-
+			dibujoDado2();
+			cout << " " << endl;
 			break;
 		case 3:
+			dibujoDado3();
+			cout << " " << endl;
 			break;
 		case 4:
-
+			dibujoDado4();
+			cout << " " << endl;
 			break;
 		case 5:
-
+			dibujoDado5();
+			cout << " " << endl;
+			break;
+		case 6:
+			dibujoDado6();
+			cout << " " << endl;
 			break;
 		}
 	}
