@@ -177,8 +177,7 @@ int main()
 		else
 		{
 			sort(puntaje.begin(), puntaje.end());
-			int lugar = puntaje.size() - 1;
-			puntaje_partida += puntaje[lugar];
+			puntaje_partida += puntaje[(puntaje.size() - 1)];
 
 			for (auto x : dados) { cout << x; }
 			cout << endl;
