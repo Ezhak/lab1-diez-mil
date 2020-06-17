@@ -4,8 +4,11 @@
 #include <random>
 #include <vector>
 #include <time.h>
+#include <Windows.h> 
+#include <stdio.h>
 using namespace std;
 
+//DADOS
 void dibujoDado1() {
 	cout << "¦¦¦¦¦¦¦¦¦" << endl;
 	cout << "¦       ¦" << endl;
@@ -55,6 +58,7 @@ void dibujoDado6() {
 	cout << "" << endl;
 }
 
+//JUEGO
 int main()
 {
 	//srand(time(NULL));  // Init randomizer
