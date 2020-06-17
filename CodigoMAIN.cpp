@@ -2,7 +2,19 @@
 #include <algorithm>
 #include <vector>
 #include <time.h>
+#include <windows.h> 
+#include <stdio.h>
+
 using namespace std;
+
+void gotoxy(int x, int y) {
+	HANDLE hcon;
+	hcon = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD dwPos;
+	dwPos.X = x;
+	dwPos.Y = y;
+	SetConsoleCursorPosition(hcon, dwPos);
+}
 
 int main()
 {
@@ -40,6 +52,26 @@ int main()
 	{
 		if (n == 1) escalera_larga++;
 		else break;
+	}
+
+	for (int i = 0; i < 6; i++)
+	{
+		switch (dados[i]) {
+		case 1:
+			gotoxy();
+			break;
+		case 2:
+
+			break;
+		case 3:
+			break;
+		case 4:
+
+			break;
+		case 5:
+
+			break;
+		}
 	}
 
 	if (escalera_larga != 6) //chequea por trio, trio ampliado o un sexteto (si es que no hay una escalera)
