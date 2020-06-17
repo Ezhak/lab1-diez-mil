@@ -1,8 +1,9 @@
 ﻿#include <iostream>
 #include <algorithm>
+#include <functional>
+#include <random>
 #include <vector>
 #include <time.h>
-
 using namespace std;
 
 void dibujoDado1() {
@@ -56,14 +57,25 @@ void dibujoDado6() {
 
 int main()
 {
-	srand(time(NULL));  // Init randomizer
+	//srand(time(NULL));  // Init randomizer
+    //// Setup ONCE
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1,6);
+
+    //std::default_random_engine generator;
+    //std::uniform_int_distribution<int> distribution(1,6);
+    //auto dice = std::bind ( distribution, generator );
+    //int wisdom = dice()+dice()+dice();
+    //std::cout << wisdom;
+
 	vector<int> dices;  // Tiro de dados
 	vector<int> times;  // Contador de repeticiones
 
     // Carga el tiro de dados (vector)
     // con números al azar entre 1 y 6
 	for (int i = 0; i < 6; i++)
-		dices.push_back(rand() % 6 + 1);
+		dices.push_back(dis(gen));
 
     // Cuenta repeticiones del número 'x' en el tiro
 	for (int x = 1; x <= 6; x++)
@@ -97,7 +109,7 @@ int main()
 
 	for (int i = 0; i < 6; i++)
 	{
-		switch (dados[i]) {
+		switch (dices[i]) {
 		case 1:
 			dibujoDado1();
 			cout << " " << endl;
@@ -242,7 +254,9 @@ int main()
 
 		else {
 			cout << "No conseguiste ninguna combinacion.\n";
-			for (auto x : dados) { cout << x; }
+			for (auto x : dices) 
+                cout << x;
+
 			return 0;
 		}
 
@@ -254,13 +268,14 @@ int main()
 			cout << "██║███╗██║██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗" << endl;
 			cout << "╚███╔███╔╝██║██║ ╚████║██║ ╚████║███████╗██║  ██║" << endl;
 			cout << "╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝" << endl;
+            return 0;
 		}
 
 		else {
 			sort(partial_scores.begin(), partial_scores.end());
 			total_score += partial_scores[(partial_scores.size() - 1)];
 
-			for (auto x : dados)
+			for (auto x : dices)
                 cout << x;
 
 			cout << endl;
