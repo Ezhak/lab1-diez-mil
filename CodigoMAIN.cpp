@@ -144,8 +144,10 @@ void dibujoDado6() {
 	gotoxy(59, 5); printf("%c", 219);
 	//Valor
 	gotoxy(53, 2); printf("%c", 2);
+	gotoxy(53, 3); printf("%c", 2);
 	gotoxy(53, 4); printf("%c", 2);
 	gotoxy(57, 2); printf("%c", 2);
+	gotoxy(57, 3); printf("%c", 2);
 	gotoxy(57, 4); printf("%c", 2);
 	//
 	gotoxy(10, 5);
