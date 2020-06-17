@@ -47,7 +47,7 @@ int main()
 		if (cont[0] > 2)
 		{
 			if ((cont[0] == 4) or (cont[0] == 5)) tri_amp = true;
-			else if (cont[0] == 3) tri == true;
+			else if (cont[0] == 3) tri = true;
 			else sexteto = true;
 		}
 
