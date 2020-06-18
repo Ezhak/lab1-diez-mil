@@ -6,210 +6,120 @@
 #include <time.h>
 #include <Windows.h> 
 #include <stdio.h>
+#include <stdlib.h>
 using namespace std;
 
 //dices
 void gotoxy(int x, int y)
-	{
-		static HANDLE h = NULL;
-		if (!h)
-			h = GetStdHandle(STD_OUTPUT_HANDLE);
-		COORD c = { x, y };
-		SetConsoleCursorPosition(h, c);
-	}
-
-//JUEGO
-int main()
 {
-	//dado 1
-	for (int i = 1; i <= 9; i++) {
-		gotoxy(i, 0); printf("%c", 220); //lado arriba
-		gotoxy(i, 4); printf("%c", 223); //lado abajo
+	static HANDLE h = NULL;
+	if (!h)
+		h = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD c = { x, y };
+	SetConsoleCursorPosition(h, c);
+}
+
+void dibujar_marco(int x)
+{
+	int offset_x = 10 * x;
+	for (int i = 1 + offset_x; i <= 9 + offset_x; i++)
+	{
+		gotoxy(i, 0); putchar(220); //lado arriba
+		gotoxy(i, 4); putchar(223); //lado abajo
 	}
 	for (int i = 1; i < 4; i++)
 	{
-		gotoxy(1, i); printf("%c", 219); //lado izquierdo
-		gotoxy(9, i); printf("%c", 219); //lado derecho
-	}
+		gotoxy(1 + offset_x, i); putchar(219); //lado izquierdo
 
-	//dado 2
-	for (int i = 1 + 10; i <= 9 + 10; i++) {
-		gotoxy(i, 0); printf("%c", 220); //lado arriba
-		gotoxy(i, 4); printf("%c", 223); //lado abajo
+		gotoxy(9 + offset_x, i); putchar(219); //lado derecho
 	}
-	for (int i = 1; i < 4; i++)
+}
+
+void dibujar_dado(int x, int y)
+{
+	int offset_x = 10 * x;
+	dibujar_marco(x);
+	switch (y)
 	{
-		gotoxy(1 + 10, i); printf("%c", 219); //lado izquierdo
-		gotoxy(9 + 10, i); printf("%c", 219); //lado derecho
-	}
+	case 1:
+		gotoxy(5 + offset_x, 2); putchar(254); //medio
+		gotoxy(7 + offset_x, 3); printf(" "); //espacio
+		break;
+	case 2:
+		gotoxy(3 + offset_x, 1); putchar(254); //punto izquierdo alto
+		gotoxy(7 + offset_x, 3); putchar(254); //punto derecho bajo
+		break;
 
-	//dado 3
-	for (int i = 1 + 10 * 2; i <= 9 + 10 * 2; i++) {
-		gotoxy(i, 0); printf("%c", 220); //lado arriba
-		gotoxy(i, 4); printf("%c", 223); //lado abajo
-	}
-	for (int i = 1; i < 4; i++)
-	{
-		gotoxy(1 + 10 * 2, i); printf("%c", 219); //lado izquierdo
-		gotoxy(9 + 10 * 2, i); printf("%c", 219); //lado derecho
-	}
+	case 3:
+		gotoxy(3 + offset_x, 1); putchar(254); //punto izquierdo alto
+		gotoxy(5 + offset_x, 2); putchar(254); //medio
+		gotoxy(7 + offset_x, 3); putchar(254); //punto derecho bajo
+		break;
 
-	//dado 4
-	for (int i = 1 + 10 * 3; i <= 9 + 10 * 3; i++) {
-		gotoxy(i, 0); printf("%c", 220); //lado arriba
-		gotoxy(i, 4); printf("%c", 223); //lado abajo
+	case 4:
+		gotoxy(3 + offset_x, 1); putchar(254); //punto izquierdo alto
+		gotoxy(3 + offset_x, 3); putchar(254); //punto izquierdo bajo
+		gotoxy(7 + offset_x, 1); putchar(254); //punto derecho alto
+		gotoxy(7 + offset_x, 3); putchar(254); //punto derecho bajo
+		break;
+	case 5:
+		gotoxy(3 + offset_x, 1); putchar(254); //punto izquierdo alto
+		gotoxy(3 + offset_x, 3); putchar(254); //punto izquierdo bajo
+		gotoxy(5 + offset_x, 2); putchar(254); //medio
+		gotoxy(7 + offset_x, 1); putchar(254); //punto derecho alto
+		gotoxy(7 + offset_x, 3); putchar(254); //punto derecho bajo
+		break;
+	case 6:
+		gotoxy(3 + offset_x, 1); putchar(254); //punto izquierdo alto
+		gotoxy(3 + offset_x, 2); putchar(254); //punto izquierdo medio
+		gotoxy(3 + offset_x, 3); putchar(254); //punto izquierdo bajo
+		gotoxy(7 + offset_x, 1); putchar(254); //punto derecho alto
+		gotoxy(7 + offset_x, 2); putchar(254); //punto derecho medio
+		gotoxy(7 + offset_x, 3); putchar(254); //punto derecho bajo
+		break;
+	default:
+		break;
 	}
-	for (int i = 1; i < 4; i++)
-	{
-		gotoxy(1 + 10 * 3, i); printf("%c", 219); //lado izquierdo
-		gotoxy(9 + 10 * 3, i); printf("%c", 219); //lado derecho
-	}
+}
 
-	//dado 5
-	for (int i = 1 + 10 * 4; i <= 9 + 10 * 4; i++) {
-		gotoxy(i, 0); printf("%c", 220); //lado arriba
-		gotoxy(i, 4); printf("%c", 223); //lado abajo
-	}
-	for (int i = 1; i < 4; i++)
-	{
-		gotoxy(1 + 10 * 4, i); printf("%c", 219); //lado izquierdo
-		gotoxy(9 + 10 * 4, i); printf("%c", 219); //lado derecho
-	}
+void test_game_1_game_5(bool game_1, bool game_5) {
 
-	//dado 6
-	for (int i = 1 + 10 * 5; i <= 9 + 10 * 5; i++) {
-		gotoxy(i, 0); printf("%c", 220); //lado arriba
-		gotoxy(i, 4); printf("%c", 223); //lado abajo
+	if (game_1) {
+		cout << "Tambien conseguiste un juego de unos! Pero estos puntos no se cuentan." << "\n";
 	}
-	for (int i = 1; i < 4; i++)
-	{
-		gotoxy(1 + 10 * 5, i); printf("%c", 219); //lado izquierdo
-		gotoxy(9 + 10 * 5, i); printf("%c", 219); //lado derecho
+	if (game_5) {
+		cout << "Tambien conseguiste un juego de cincos! Pero estos puntos no se cuentan." << "\n";
 	}
-
+}
+void tirar_dados()
+{
 	//srand(time(NULL));  // Init randomizer
-    //// Setup ONCE
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1,6);
+	//// Setup ONCE
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(1, 6);
 
-    //std::default_random_engine generator;
-    //std::uniform_int_distribution<int> distribution(1,6);
-    //auto dice = std::bind ( distribution, generator );
-    //int wisdom = dice()+dice()+dice();
-    //std::cout << wisdom;
+	//std::default_random_engine generator;
+	//std::uniform_int_distribution<int> distribution(1,6);
+	//auto dice = std::bind ( distribution, generator );
+	//int wisdom = dice()+dice()+dice();
+	//std::cout << wisdom;
 
 	vector<int> dices;  // Tiro de dices
 	vector<int> times;  // Contador de repeticiones
 
-    // Carga el tiro de dices (vector)
-    // con números al azar entre 1 y 6
+	// Carga el tiro de dices (vector)
+	// con números al azar entre 1 y 6
 	for (int i = 0; i < 6; i++)
 		dices.push_back(dis(gen));
 
-    // Cuenta repeticiones del número 'x' en el tiro
+	// Cuenta repeticiones del número 'x' en el tiro
 	for (int x = 1; x <= 6; x++)
 		times.push_back(count(dices.begin(), dices.end(), x));
 
-
-	int pos = 0;
-	int i = 0;
-	for (auto x : dices)
+	for (int i = 0; i < 6; i++)
 	{
-		switch (x)
-		{
-		case 1:
-			for (i; i < 6; i++)
-			{
-				if (dices[i] == 1)
-				{
-					pos = (10 * i);
-					break;
-				}
-			}
-			i++;
-			gotoxy(5 + pos, 2); printf("%c", 254); //medio
-			break;
-		case 2:
-			for (i; i < 6; i++)
-			{
-				if (dices[i] == 2)
-				{
-					pos = (10 * i);
-					break;
-				}
-			}
-			i++;
-			gotoxy(3 + pos, 1); printf("%c", 254); //punto izquierdo alto
-			gotoxy(7 + pos, 3); printf("%c", 254); //punto derecho bajo
-			break;
-
-		case 3:
-			for (i; i < 6; i++)
-			{
-				if (dices[i] == 3)
-				{
-					pos = (10 * i);
-					break;
-				}
-			}
-			i++;
-			gotoxy(3 + pos, 1); printf("%c", 254); //punto izquierdo alto
-			gotoxy(5 + pos, 2); printf("%c", 254); //medio
-			gotoxy(7 + pos, 3); printf("%c", 254); //punto derecho bajo
-			break;
-
-		case 4:
-			for (i; i < 6; i++)
-			{
-				if (dices[i] == 4)
-				{
-					pos = (10 * i);
-					break;
-				}
-			}
-			i++;
-			gotoxy(3 + pos, 1); printf("%c", 254); //punto izquierdo alto
-			gotoxy(3 + pos, 3); printf("%c", 254); //punto izquierdo bajo
-			gotoxy(7 + pos, 1); printf("%c", 254); //punto derecho alto
-			gotoxy(7 + pos, 3); printf("%c", 254); //punto derecho bajo
-			break;
-		case 5:
-			for (i; i < 6; i++)
-			{
-				if (dices[i] == 5)
-				{
-					pos = (10 * i);
-					break;
-				}
-			}
-			i++;
-			gotoxy(3 + pos, 1); printf("%c", 254); //punto izquierdo alto
-			gotoxy(3 + pos, 3); printf("%c", 254); //punto izquierdo bajo
-			gotoxy(5 + pos, 2); printf("%c", 254); //medio
-			gotoxy(7 + pos, 1); printf("%c", 254); //punto derecho alto
-			gotoxy(7 + pos, 3); printf("%c", 254); //punto derecho bajo
-			break;
-		case 6:
-			for (i; i < 6; i++)
-			{
-				if (dices[i] == 6)
-				{
-					pos = (10 * i);
-					break;
-				}
-			}
-			i++;
-			gotoxy(3 + pos, 1); printf("%c", 254); //punto izquierdo alto
-			gotoxy(3 + pos, 2); printf("%c", 254); //punto izquierdo medio
-			gotoxy(3 + pos, 3); printf("%c", 254); //punto izquierdo bajo
-			gotoxy(7 + pos, 1); printf("%c", 254); //punto derecho alto
-			gotoxy(7 + pos, 2); printf("%c", 254); //punto derecho medio
-			gotoxy(7 + pos, 3); printf("%c", 254); //punto derecho bajo
-			break;
-		default:
-			break;
-		}
+		dibujar_dado(i, dices[i]);
 	}
 	cout << endl << endl;
 
@@ -228,32 +138,32 @@ int main()
 	int total_score = 0;
 	bool sextet_win = false;
 
-    // Aux
+	// Aux
 	int number;
 
-   // Chequea si el tiro es una escalera larga
+	// Chequea si el tiro es una escalera larga
 	for (auto n : times) {
 		if (n == 1)
-            long_ladder++;
+			long_ladder++;
 		else
-            break;
+			break;
 	}
 
-    // Chequea por trio, trio ampliado o un sexteto (si es que no hay una escalera)
+	// Chequea por trio, trio ampliado o un sexteto (si es que no hay una escalera)
 	if (long_ladder != 6) {
 		if (times[0] > 2) {
 			if ((times[0] == 4) || (times[0] == 5))
-                trio_ext = true;
+				trio_ext = true;
 			else if (times[0] == 3)
-                trio = true;
+				trio = true;
 			else
-                sextet = true;
+				sextet = true;
 		}
 
 		if (!trio && !trio_ext && !sextet) {
 			triple_par = true;
 
-            // Chequea si hay triple par (si no hay ninguno de los trios o sextetos)
+			// Chequea si hay triple par (si no hay ninguno de los trios o sextetos)
 			for (auto n : times) {
 				if (n % 2 != 0) {
 					triple_par = false;
@@ -261,116 +171,96 @@ int main()
 				}
 			}
 
-            // Chequea si hay un trio o un trio++
+			// Chequea si hay un trio o un trio++
 			for (int i = 1; i < 6; i++) {
 				if (times[i] == 3) {
-					trio_x = true; 
+					trio_x = true;
 					number = i + 1;
 				}
 
 				else if ((times[i] == 4) || (times[i] == 5)) {
-					trio_xplus = true; 
+					trio_xplus = true;
 					number = i + 1;
 				}
 			}
 		}
 
-        // Chequea si hay juego de unos o cincos
-		if ( !triple_par && !sextet ) {
+		// Chequea si hay juego de unos o cincos
+		if (!triple_par && !sextet) {
 			if ((times[0] == 1) || (times[0] == 2))
-                game_1 = true;
+				game_1 = true;
 			if ((times[4] == 1) || (times[4] == 2))
-                game_5 = true;
+				game_5 = true;
 		}
 	}
-	
+
 	// Puntajes
 	if (sextet)
-        sextet_win = true;
+		sextet_win = true;
 
 	else {
 		vector<int> partial_scores; // Para chequear cual es el puntaje mas grande
-		if (trio_ext) { 
-			partial_scores.push_back(2000); 
+		if (game_1) partial_scores.push_back(100 * times[0]);
+		if (game_5) partial_scores.push_back(50 * times[4]);
+
+		if (trio_ext) {
+			partial_scores.push_back(2000);
 			cout << "Conseguiste un trío ampliado! +2000\n";
 		}
 
-		else if (long_ladder == 6) { 
-			partial_scores.push_back(1500); 
+		else if (long_ladder == 6) {
+			partial_scores.push_back(1500);
 			cout << "Conseguiste una escalera larga! +1500\n";
 		}
 
-		else if (triple_par) { 
-			partial_scores.push_back(1000); 
+		else if (triple_par) {
+			partial_scores.push_back(1000);
 			cout << "Conseguiste un triple par! +1000\n";
 		}
 
-		else if (trio_xplus) { 
-			partial_scores.push_back(number * 200); 
-			cout << "Conseguiste un trío ampliado de " << number << "! +" << number * 200 << "\n";
-			if (game_1) {
-				partial_scores.push_back(times[0] * 100);
-				cout << "También conseguiste un juego de unos! Pero estos puntos no se cuentan." << "\n";
-			}
-			if (game_5) {
-				partial_scores.push_back(times[4] * 50);
-				cout << "También conseguiste un juego de cincos! Pero estos puntos no se cuentan." << "\n";
-			}
+		else if (trio_xplus) {
+			partial_scores.push_back(number * 200);
+			cout << "Conseguiste un trio ampliado de " << number << "! +" << number * 200 << "\n";
+			test_game_1_game_5(game_1, game_5);
 		}
 
 		else if (trio) {
 			partial_scores.push_back(1000);
-			cout << "Conseguiste un trío! +1000\n";
-			if (game_1) {
-				partial_scores.push_back(times[0] * 100);
-				cout << "También conseguiste un juego de unos! Pero estos puntos no se cuentan." << "\n";
-			}
-			if (game_5) {
-				partial_scores.push_back(times[4] * 50);
-				cout << "También conseguiste un juego de cincos! Pero estos puntos no se cuentan." << "\n";
-			}
+			cout << "Conseguiste un trio! +1000\n";
+			test_game_1_game_5(game_1, game_5);
 		}
 
-		else if (trio_x) { 
-			partial_scores.push_back(number * 100); 
-			cout << "Conseguiste un trío de " << number << "! +" << number * 100 << "\n";
-			if (game_1) {
-				partial_scores.push_back(times[0] * 100);
-				cout << "Tambien conseguiste un juego de unos! Pero estos puntos no se cuentan." << "\n";
-			}
-			if (game_5) {
-				partial_scores.push_back(times[4] * 50);
-				cout << "Tambien conseguiste un juego de cincos! Pero estos puntos no se cuentan." << "\n";
-			}
+		else if (trio_x) {
+			partial_scores.push_back(number * 100);
+			cout << "Conseguiste un trio de " << number << "! +" << number * 100 << "\n";
+			test_game_1_game_5(game_1, game_5);
 		}
 
 		else if (game_1) {
-			partial_scores.push_back(times[0] * 100);
 			cout << "Conseguiste un juego de unos! +" << times[0] * 100 << "\n";
 		}
 
 		else if (game_5) {
-			partial_scores.push_back(times[4] * 50);
 			cout << "Conseguiste un juego de cincos! +" << times[4] * 50 << "\n";
 		}
 
 		else {
 			cout << "No conseguiste ninguna combinacion.\n";
-			for (auto x : dices) 
-                cout << x;
+			for (auto x : dices)
+				cout << x;
 
-			return 0;
+			return;
 		}
 
 		if (sextet_win) {
-			cout << "TE SALIÓ UN SEXTETO!!!" << endl << endl << endl;
+			cout << "TE SALIÓ UN SEXTETO!!!" << endl;
 			cout << "██╗    ██╗██╗███╗   ██╗███╗   ██╗███████╗██████╗" << endl;
 			cout << "██║    ██║██║████╗  ██║████╗  ██║██╔════╝██╔══██╗" << endl;
 			cout << "██║ █╗ ██║██║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝" << endl;
 			cout << "██║███╗██║██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗" << endl;
 			cout << "╚███╔███╔╝██║██║ ╚████║██║ ╚████║███████╗██║  ██║" << endl;
 			cout << "╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝" << endl;
-            return 0;
+			return;
 		}
 
 		else {
@@ -378,10 +268,22 @@ int main()
 			total_score += partial_scores[(partial_scores.size() - 1)];
 
 			for (auto x : dices)
-                cout << x;
+				cout << x;
 
 			cout << endl;
 			cout << total_score;
 		}
 	}
+}
+
+//JUEGO
+int main()
+{
+	char res;
+	do {
+		system("CLS");
+		tirar_dados();
+		cout << "\nJugar de vuelta? S/N\n";
+		cin >> res; res = tolower(res);
+	} while (res == 's');
 }
