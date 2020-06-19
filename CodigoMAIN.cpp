@@ -328,7 +328,7 @@ int main()
 	char res; 
 	string name; 
 	string name2;
-	int total_score_round = 0; int total_score_round_ant = 0;
+	int total_score_round = 0;
 	int round_number = 1;
 	int lanzamiento = 0;
 	int total_points_1 = 0;
@@ -366,13 +366,6 @@ int main()
 		do {
 			if (total_score_round == 0) round_number = 1;
 			system("CLS");
-			/*
-			total_score_round_ant = total_score_round;
-			total_score_round+= tirar_dados(total_score_round);
-			if (total_score_round > 10000) {
-				total_score_round = total_score_round_ant;
-			}
-			*/
 			total_score_round = tirar_dados(total_score_round);
 			gotoxy(0, 12);
 			cout << "\nTurno de: " << name << " | " << "Ronda " << round_number << " | " << total_score_round;
