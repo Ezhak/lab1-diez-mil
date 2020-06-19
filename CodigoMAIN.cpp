@@ -34,7 +34,7 @@ void dibujar_ui(int x)
 		gotoxy(80, i); putchar(186); //lado derecho
 	}
 	gotoxy(1, x); putchar(200); //esquina abajo izquierdo
-	gotoxy(63, x); putchar(188); //esquina abajo derecho
+	gotoxy(80, x); putchar(188); //esquina abajo derecho
 
 }
 
