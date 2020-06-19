@@ -3,21 +3,8 @@
 #include <functional>
 #include <random>
 #include <vector>
-#include <time.h>
-#include <Windows.h> 
-#include <stdio.h>
-#include <stdlib.h>
+#include "rlutil.h"
 using namespace std;
-
-//dices
-void gotoxy(int x, int y)
-{
-	static HANDLE h = NULL;
-	if (!h)
-		h = GetStdHandle(STD_OUTPUT_HANDLE);
-	COORD c = { x, y };
-	SetConsoleCursorPosition(h, c);
-}
 
 void dibujar_ui(int x)
 {
@@ -274,7 +261,7 @@ int tirar_dados(int total_score_round)
 		}
 
 		if (sextet_win) {
-			system("CLS"); dibujar_ui(15);
+            rlutil::cls(); dibujar_ui(15);
 			cout << "TE SALIÓ UN SEXTETO!!!" << endl;
 			cout << "██╗    ██╗██╗███╗   ██╗███╗   ██╗███████╗██████╗" << endl;
 			cout << "██║    ██║██║████╗  ██║████╗  ██║██╔════╝██╔══██╗" << endl;
@@ -304,7 +291,7 @@ int tirar_dados(int total_score_round)
 //JUEGO
 int main()
 {
-	system("CLS"); dibujar_ui(15);
+    rlutil::cls(); dibujar_ui(15);
 
 	int gamemode; 
 	char res; 
@@ -324,7 +311,7 @@ int main()
 	cout << "\n██████╔╝██║███████╗███████╗    ██║ ╚═╝ ██║██║███████╗";
 	cout << "\n╚═════╝ ╚═╝╚══════╝╚══════╝    ╚═╝     ╚═╝╚═╝╚══════╝";
 	*/
-	system("CLS"); dibujar_ui(15);
+    rlutil::cls(); dibujar_ui(15);
 	gotoxy(2, 2);
 	cout << "1 - Juego nuevo para un jugador" << endl;
 	gotoxy(2, 3);
@@ -339,15 +326,15 @@ int main()
 	switch (gamemode) {
 	case 1:
 		//--Interfaz --
-		system("CLS"); dibujar_ui(15);
+        rlutil::cls(); dibujar_ui(15);
 		gotoxy(2, 2);
 		cout << "Nombre? " << endl;
 		gotoxy(2, 3);
 		cin >> name;
-		system("CLS");
+        rlutil::cls();
 		do {
 			if (total_score_round == 0) round_number = 1;
-			system("CLS");
+            rlutil::cls();
 			total_score_round = tirar_dados(total_score_round);
 			gotoxy(0, 12);
 			cout << "\nTurno de: " << name << " | " << "Ronda " << round_number << " | " << total_score_round;
@@ -357,7 +344,7 @@ int main()
 			round_number++;
 		} while (res == 's');
 
-		system("CLS"); dibujar_ui(15);
+        rlutil::cls(); dibujar_ui(15);
 		gotoxy(25, 5);
 		cout << name << endl;
 		gotoxy(22, 7);
@@ -368,26 +355,26 @@ int main()
 	case 2:
 
 		// 1º Player
-		system("CLS"); dibujar_ui(15);
+        rlutil::cls(); dibujar_ui(15);
 		dibujar_ui(15);
 		gotoxy(2, 2);
 		cout << "Nombre del primer jugador? " << endl;
 		gotoxy(2, 3);
 		cin >> name;
 		// 2º Player
-		system("CLS"); dibujar_ui(15);
+        rlutil::cls(); dibujar_ui(15);
 		dibujar_ui(15);
 		gotoxy(2, 2);
 		cout << "Nombre del segundo jugador? " << endl;
 		gotoxy(2, 3);
 		cin >> name2;
-		system("CLS");
+        rlutil::cls();
 
 		do {
 			// Primer Jugador
 			do{
 			lanzamiento++;
-			system("CLS"); dibujar_ui(15);
+            rlutil::cls(); dibujar_ui(15);
 			if (total_score_round == 0) lanzamiento = 1;
 			total_points_1 = tirar_dados(total_points_1);
 			gotoxy(0, 12);
@@ -399,7 +386,7 @@ int main()
 			lanzamiento = 0;
 
 			// Entreturno 1
-			system("CLS"); dibujar_ui(15);
+            rlutil::cls(); dibujar_ui(15);
 			gotoxy(18, 5);
 			cout << "NUMEROS DE RONDAS: " << round_number << endl;
 			gotoxy(18, 6);
@@ -408,12 +395,12 @@ int main()
 			cout << "PUNTAJE " << name << ": " << total_points_1 << endl;
 			gotoxy(18, 10);
 			cout << "PUNTAJE " << name2 << ": " << total_points_2 << endl;
-			Sleep(5000);
+            rlutil::msleep(5000);
 
 			// Jugador Dos
 			do {
 				lanzamiento++;
-				system("CLS"); dibujar_ui(15);
+                rlutil::cls(); dibujar_ui(15);
 				if (total_score_round == 0) round_number = 1;
 				total_points_2 = tirar_dados(total_points_2);
 				gotoxy(0, 12);
@@ -426,7 +413,7 @@ int main()
 			round_number++;
 
 			// Entreturno 2
-			system("CLS"); dibujar_ui(15);
+            rlutil::cls(); dibujar_ui(15);
 			gotoxy(18, 5);
 			cout << "NUMEROS DE RONDAS: " << round_number << endl;
 			gotoxy(18, 6);
@@ -435,7 +422,7 @@ int main()
 			cout << "PUNTAJE " << name << ": " << total_points_1 << endl;
 			gotoxy(18, 10);
 			cout << "PUNTAJE " << name2 << ": " << total_points_2 << endl;
-			Sleep(5000);
+            rlutil::msleep(5000);
 
 		} while (round_number<=10 || total_points_1 !=10000 || total_points_2 != 10000);
 
@@ -444,11 +431,10 @@ int main()
 		// Condicion de un ciclo para repetir el juego
 		break;
 	default:
-		system("CLS"); dibujar_ui(15);
+        rlutil::cls(); dibujar_ui(15);
 		gotoxy(2, 2);
 		cout << "El modo ingresado no es válido. : ) Adios";
 
 	}
 	gotoxy(0,17);
-	system("Pause");	
 }
