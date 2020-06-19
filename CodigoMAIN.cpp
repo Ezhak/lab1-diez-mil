@@ -379,6 +379,8 @@ int main()
 		cout << name << endl;
 		gotoxy(35, 13);
 		cout << "PUNTAJE TOTAL: " << total_score_round << endl;
+		gotoxy(35, 14);
+		cout << "CANTIDAD DE RONDAS TOTALES: " << round_number << endl;
 		break;
 	case 2:
 
