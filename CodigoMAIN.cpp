@@ -19,6 +19,7 @@ void gotoxy(int x, int y)
 	SetConsoleCursorPosition(h, c);
 }
 
+//(izquierda derecha, arriba abajo)
 void dibujar_marco(int x)
 {
 	int offset_x = 10 * x;
@@ -30,7 +31,6 @@ void dibujar_marco(int x)
 	for (int i = 1; i < 4; i++)
 	{
 		gotoxy(1 + offset_x, i); putchar(219); //lado izquierdo
-
 		gotoxy(9 + offset_x, i); putchar(219); //lado derecho
 	}
 }
@@ -109,6 +109,7 @@ void test_game_1_game_5(bool game_1, bool game_5) {
 		cout << "Tambien conseguiste un juego de cincos! Pero estos puntos no se cuentan." << "\n";
 	}
 }
+
 int tirar_dados(int total_score_round)
 {
 	//srand(time(NULL));  // Init randomizer
@@ -343,17 +344,16 @@ int main()
 		gotoxy(2, 3);
 		cin >> name;
 		system("CLS");
-
 		do {
-			if (total_score_round == 0) round_number = 0;
+			if (total_score_round == 0) round_number = 1;
 			system("CLS");
 			total_score_round = tirar_dados(total_score_round);
 			gotoxy(0, 12);
-			cout << "Turno de: " << name << " | " << "Ronda " << round_number << " | " << total_score_round;
+			cout << "\nTurno de: " << name << " | " << "Ronda " << round_number << " | " << total_score_round;
 			cout << "\nJugar de vuelta? S/N\n";
 			cin >> res; res = tolower(res);
 			round_number++;
-		} while (res == 's' || total_score_round == 10000);
+		} while (res == 's' || total_score_round == 10000 || total_score_round != 0);
 
 		system("CLS"); dibujar_marco_interfaz();
 		gotoxy(40, 10);
@@ -386,8 +386,8 @@ int main()
 				system("CLS");
 				lanzamiento++;
 				cout << "Turno de: " << name << " | " << "Ronda " << round_number << " | Puntaje total: " << total_points_1;
-				cout << "------------------------------";
-				cout << "Lanzamiento " << lanzamiento;
+				cout << "\n------------------------------";
+				cout << "\nLanzamiento " << lanzamiento;
 				tirar_dados(0);
 				total_points_1 = tirar_dados(total_score_round);
 				cout << "\nJugar de vuelta? S/N\n";
@@ -398,8 +398,8 @@ int main()
 				system("CLS");
 				lanzamiento++;
 				cout << "Turno de: " << name2 << " | " << "Ronda " << round_number << " | Puntaje total: " << total_points_2;
-				cout << "------------------------------";
-				cout << "Lanzamiento " << lanzamiento;
+				cout << "\n------------------------------";
+				cout << "\nLanzamiento " << lanzamiento;
 				tirar_dados(0);
 				total_points_2 = tirar_dados(total_score_round);
 				cout << "\nJugar de vuelta? S/N\n";
