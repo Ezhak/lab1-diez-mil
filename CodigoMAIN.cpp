@@ -235,7 +235,7 @@ void tirar_dados()
 			partial_scores.push_back(1000);
 			cout << "Conseguiste un triple par! +1000\n";
 		}
-
+		// Que dificil es hacer un juego.
 		else if (trio_xplus) {
 			partial_scores.push_back(number * 200);
 			cout << "Conseguiste un trio ampliado de " << number << "! +" << number * 200 << "\n";
@@ -272,6 +272,7 @@ void tirar_dados()
 		}
 
 		if (sextet_win) {
+			system("CLS"); dibujar_marco_interfaz();
 			cout << "TE SALIÓ UN SEXTETO!!!" << endl;
 			cout << "██╗    ██╗██╗███╗   ██╗███╗   ██╗███████╗██████╗" << endl;
 			cout << "██║    ██║██║████╗  ██║████╗  ██║██╔════╝██╔══██╗" << endl;
@@ -294,6 +295,8 @@ void tirar_dados()
 		}
 	}
 	total_score_round += total_score;
+	gotoxy(1, 11);
+	cout << "Numero de Ronda: " << endl;
 	gotoxy(25, 12);
 	cout << "| Puntaje Acumulado al momento: " << total_score_round << endl;
 }
@@ -304,24 +307,26 @@ int main()
 	system("CLS"); dibujar_marco_interfaz();
 	int gamemode; char res; char name[20]; char name2[20];
 	/*
-	std::cout << "\n██████╗ ██╗███████╗███████╗    ███╗   ███╗██╗██╗";
-	std::cout << "\n██╔══██╗██║██╔════╝╚══███╔╝    ████╗ ████║██║██║";
-	std::cout << "\n██║  ██║██║█████╗    ███╔╝     ██╔████╔██║██║██║";
-	std::cout << "\n██║  ██║██║██╔══╝   ███╔╝      ██║╚██╔╝██║██║██║";
-	std::cout << "\n██████╔╝██║███████╗███████╗    ██║ ╚═╝ ██║██║███████╗";
-	std::cout << "\n╚═════╝ ╚═╝╚══════╝╚══════╝    ╚═╝     ╚═╝╚═╝╚══════╝";
+	cout << "\n██████╗ ██╗███████╗███████╗    ███╗   ███╗██╗██╗";
+	cout << "\n██╔══██╗██║██╔════╝╚══███╔╝    ████╗ ████║██║██║";
+	cout << "\n██║  ██║██║█████╗    ███╔╝     ██╔████╔██║██║██║";
+	cout << "\n██║  ██║██║██╔══╝   ███╔╝      ██║╚██╔╝██║██║██║";
+	cout << "\n██████╔╝██║███████╗███████╗    ██║ ╚═╝ ██║██║███████╗";
+	cout << "\n╚═════╝ ╚═╝╚══════╝╚══════╝    ╚═╝     ╚═╝╚═╝╚══════╝";
 	*/
+	system("CLS"); dibujar_marco_interfaz();
 	gotoxy(2, 2);
-	std::cout << "\n1 - Juego nuevo para un jugador";
+	cout << "1 - Juego nuevo para un jugador" << endl;
 	gotoxy(2, 3);
-	std::cout << "\n2 - Juego nuevo para dos jugadores";
+	cout << "2 - Juego nuevo para dos jugadores" << endl;
 	gotoxy(2, 4);
-	std::cout << "\n3 - Mostrar puntuación más alta";
-	gotoxy(2, 5);
-	std::cout << "\n\nModo de juego ? ";
-	std::cin >> gamemode;
-	std::cin.clear();
-	std::cin.ignore(256, '\n');
+	cout << "3 - Mostrar puntuación más alta" << endl;
+	gotoxy(2, 8);
+	cout << "Modo de juego ? " << endl;
+	gotoxy(2, 9);
+	cin >> gamemode;
+	cin.clear();
+	cin.ignore(256, '\n');
 	
 	switch (gamemode) {
 	case 1:
@@ -340,6 +345,12 @@ int main()
 			cout << "\nJugar de vuelta? S/N\n";
 			cin >> res; res = tolower(res);
 		} while (res == 's');
+		system("CLS"); dibujar_marco_interfaz();
+		gotoxy(40, 10);
+		cout << name << endl;
+		gotoxy(35, 13);
+		cout << "PUNTAJE TOTAL: "<<endl;
+		
 		break;
 	case 2:
 		system("CLS"); dibujar_marco_interfaz();
@@ -361,15 +372,15 @@ int main()
 		gotoxy(2, 2);
 		cout << "Lista de puntajes: " << endl;
 		gotoxy(2, 3);
-		cout << " 1- ";
+		cout << " 1- " << "\t\t\t\t\tPuntos: " << "" << endl;
 		gotoxy(2, 4);
-		cout << " 2- ";
+		cout << " 2- " << "\t\t\t\t\tPuntos: " << "" << endl;
 		gotoxy(2, 5);
-		cout << " 3- ";
+		cout << " 3- " << "\t\t\t\t\tPuntos: " << "" << endl;
 		gotoxy(2, 6);
-		cout << " 4- ";
+		cout << " 4- " << "\t\t\t\t\tPuntos: " << "" << endl;
 		gotoxy(2, 7);
-		cout << " 5- ";
+		cout << " 5- " << "\t\t\t\t\tPuntos: " << "" << endl;
 		gotoxy(2, 8);
 		break;
 	default:
@@ -378,6 +389,6 @@ int main()
 		std::cout << "El modo ingresado no es válido. : ) Adios";
 
 	}
-	gotoxy(2, 10);
+	gotoxy(2, 40);
 	system("Pause");	
 }
