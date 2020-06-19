@@ -385,31 +385,51 @@ int main()
 
 		do {
 			lanzamiento = 0;
-			do {
-				system("CLS");
-				lanzamiento++;
-				cout << "Turno de: " << name << " | " << "Ronda " << round_number << " | Puntaje total: " << total_points_1;
-				cout << "\n------------------------------";
-				cout << "\nLanzamiento " << lanzamiento;
-				tirar_dados(0);
-				total_points_1 = tirar_dados(total_score_round);
-				if (total_points_1 == 10000)break;
-				cout << "\nJugar de vuelta? S/N\n";
-				cin >> res; res = tolower(res);
-			} while (res != 's');
+				do {
+					system("CLS");
+					lanzamiento++;
+					cout << "Turno de: " << name << " | " << "Ronda " << round_number << " | Puntaje total: " << total_points_1;
+					cout << "\n------------------------------";
+					cout << "\nLanzamiento " << lanzamiento;
+					tirar_dados(0);
+					total_points_1 = tirar_dados(total_score_round);
+					if (total_points_1 == 10000)break;
+					cout << "\nJugar de vuelta? S/N\n";
+					cin >> res; res = tolower(res);
+				} while (res == 's');
 			lanzamiento = 0;
-			do {
-				system("CLS");
-				lanzamiento++;
-				cout << "Turno de: " << name2 << " | " << "Ronda " << round_number << " | Puntaje total: " << total_points_2;
-				cout << "\n------------------------------";
-				cout << "\nLanzamiento " << lanzamiento;
-				tirar_dados(0);
-				total_points_2 = tirar_dados(total_score_round);
-				if (total_points_2 == 10000)break;
-				cout << "\nJugar de vuelta? S/N\n";
-				cin >> res; res = tolower(res);
-			} while (res != 's');
+			system("CLS"); dibujar_ui(15);
+			gotoxy(18, 5);
+			cout << "NUMEROS DE RONDAS: " << round_number << endl;
+			gotoxy(18, 6);
+			cout << "PROXIMO TURNO: " << name2 << endl;
+			gotoxy(18, 9);
+			cout << "PUNTAJE " << name << ": " << total_points_1 << endl;
+			gotoxy(18, 10);
+			cout << "PUNTAJE " << name2 << ": " << total_points_2 << endl;
+			Sleep(5000);
+				do {
+					system("CLS");
+					lanzamiento++;
+					cout << "Turno de: " << name2 << " | " << "Ronda " << round_number << " | Puntaje total: " << total_points_2;
+					cout << "\n------------------------------";
+					cout << "\nLanzamiento " << lanzamiento;
+					tirar_dados(0);
+					total_points_2 = tirar_dados(total_score_round);
+					if (total_points_2 == 10000)break;
+					cout << "\nJugar de vuelta? S/N\n";
+					cin >> res; res = tolower(res);
+				} while (res == 's');
+			system("CLS"); dibujar_ui(15);
+			gotoxy(18, 5);
+			cout << "NUMEROS DE RONDAS: " << round_number << endl;
+			gotoxy(18, 6);
+			cout << "PROXIMO TURNO: " << name2 << endl;
+			gotoxy(18, 9);
+			cout << "PUNTAJE " << name << ": " << total_points_1 << endl;
+			gotoxy(18, 10);
+			cout << "PUNTAJE " << name2 << ": " << total_points_2 << endl;
+			Sleep(5000);
 			round_number++;
 		} while (round_number <= 10 || (total_points_1 == 10000) || (total_points_2 == 10000));
 
