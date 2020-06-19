@@ -309,7 +309,7 @@ int main()
 	char res; 
 	string name; 
 	string name2;
-	int total_score_round = 0; 
+	int total_score_round = 0; int total_score_round_ant = 0;
 	int round_number = 1;
 	int lanzamiento = 0;
 	int total_points_1 = 0;
@@ -347,20 +347,26 @@ int main()
 		do {
 			if (total_score_round == 0) round_number = 1;
 			system("CLS");
+			/*
+			total_score_round_ant = total_score_round;
+			total_score_round+= tirar_dados(total_score_round);
+			if (total_score_round > 10000) {
+				total_score_round = total_score_round_ant;
+			}
+			*/
 			total_score_round = tirar_dados(total_score_round);
 			gotoxy(0, 12);
 			cout << "\nTurno de: " << name << " | " << "Ronda " << round_number << " | " << total_score_round;
 			cout << "\nJugar de vuelta? S/N\n";
 			cin >> res; res = tolower(res);
+			if (total_score_round == 10000)break;
 			round_number++;
-		} while (res == 's' || total_score_round == 10000 || total_score_round != 0);
-
+		} while (res == 's');
 		system("CLS"); dibujar_marco_interfaz();
 		gotoxy(40, 10);
 		cout << name << endl;
 		gotoxy(35, 13);
 		cout << "PUNTAJE TOTAL: " << total_score_round << endl;
-		
 		break;
 	case 2:
 
