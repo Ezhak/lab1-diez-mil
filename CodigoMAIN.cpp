@@ -368,14 +368,14 @@ int main()
 	case 2:
 
 		// 1º Player
-		system("CLS");
+		system("CLS"); dibujar_ui(15);
 		dibujar_ui(15);
 		gotoxy(2, 2);
 		cout << "Nombre del primer jugador? " << endl;
 		gotoxy(2, 3);
 		cin >> name;
 		// 2º Player
-		system("CLS");
+		system("CLS"); dibujar_ui(15);
 		dibujar_ui(15);
 		gotoxy(2, 2);
 		cout << "Nombre del segundo jugador? " << endl;
@@ -386,7 +386,7 @@ int main()
 		do {
 			lanzamiento = 0;
 				do {
-					system("CLS");
+					system("CLS"); dibujar_ui(15);
 					lanzamiento++;
 					cout << "Turno de: " << name << " | " << "Ronda " << round_number << " | Puntaje total: " << total_points_1;
 					cout << "\n------------------------------";
@@ -409,7 +409,7 @@ int main()
 			cout << "PUNTAJE " << name2 << ": " << total_points_2 << endl;
 			Sleep(5000);
 				do {
-					system("CLS");
+					system("CLS"); dibujar_ui(15);
 					lanzamiento++;
 					cout << "Turno de: " << name2 << " | " << "Ronda " << round_number << " | Puntaje total: " << total_points_2;
 					cout << "\n------------------------------";
