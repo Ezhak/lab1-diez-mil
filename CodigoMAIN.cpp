@@ -352,16 +352,18 @@ int main()
 			gotoxy(0, 12);
 			cout << "\nTurno de: " << name << " | " << "Ronda " << round_number << " | " << total_score_round;
 			cout << "\nJugar de vuelta? S/N\n";
+			if (total_score_round == 10000)break;
 			cin >> res; res = tolower(res);
 			round_number++;
-		} while (res == 's' || total_score_round == 10000 || total_score_round != 0);
+		} while (res == 's');
 
 		system("CLS"); dibujar_ui(15);
-		gotoxy(40, 10);
+		gotoxy(25, 5);
 		cout << name << endl;
-		gotoxy(35, 13);
+		gotoxy(22, 7);
 		cout << "PUNTAJE TOTAL: " << total_score_round << endl;
-		
+		gotoxy(22, 8);
+		cout << "NUMEROS DE RONDAS: " << round_number << endl;
 		break;
 	case 2:
 
@@ -391,6 +393,7 @@ int main()
 				cout << "\nLanzamiento " << lanzamiento;
 				tirar_dados(0);
 				total_points_1 = tirar_dados(total_score_round);
+				if (total_points_1 == 10000)break;
 				cout << "\nJugar de vuelta? S/N\n";
 				cin >> res; res = tolower(res);
 			} while (res != 's');
@@ -403,6 +406,7 @@ int main()
 				cout << "\nLanzamiento " << lanzamiento;
 				tirar_dados(0);
 				total_points_2 = tirar_dados(total_score_round);
+				if (total_points_2 == 10000)break;
 				cout << "\nJugar de vuelta? S/N\n";
 				cin >> res; res = tolower(res);
 			} while (res != 's');
@@ -416,9 +420,9 @@ int main()
 	default:
 		system("CLS"); dibujar_ui(15);
 		gotoxy(2, 2);
-		std::cout << "El modo ingresado no es válido. : ) Adios";
+		cout << "El modo ingresado no es válido. : ) Adios";
 
 	}
-	gotoxy(2, 40);
+	gotoxy(0,17);
 	system("Pause");	
 }
