@@ -42,34 +42,16 @@ void dibujar_ui(int x)
 void dibujar_marco(int x)
 {
 	int offset_x = 10 * x;
-	for (int i = 1 + offset_x; i <= 9 + offset_x; i++)
+	for (int i = 3 + offset_x; i <= 11 + offset_x; i++)
 	{
-		gotoxy(i, 0); putchar(220); //lado arriba
-		gotoxy(i, 4); putchar(223); //lado abajo
+		gotoxy(i, 1); putchar(220); //lado arriba
+		gotoxy(i, 5); putchar(223); //lado abajo
 	}
-	for (int i = 1; i < 4; i++)
+	for (int i = 2; i < 5; i++)
 	{
-		gotoxy(1 + offset_x, i); putchar(219); //lado izquierdo
-		gotoxy(9 + offset_x, i); putchar(219); //lado derecho
+		gotoxy(3 + offset_x, i); putchar(219); //lado izquierdo
+		gotoxy(11 + offset_x, i); putchar(219); //lado derecho
 	}
-}
-
-void dibujar_marco_interfaz() {
-	for (int i = 2; i < 100; i++) {
-		gotoxy(i, 1); putchar(205);
-		gotoxy(i, 30); putchar(205);
-	};
-	for (int i = 2; i < 30; i++) {
-		gotoxy(1, i); putchar(186);
-		gotoxy(100, i); putchar(186);
-	};
-	
-	gotoxy(1, 1); putchar(201);
-	gotoxy(1, 30); putchar( 200);
-	gotoxy(100, 1); putchar(187);
-	gotoxy(100, 30); putchar(188);
-	// Posicionamiento del cursor fuera del marco del juego
-	gotoxy(2, 2);
 }
 
 void dibujar_dado(int x, int y)
@@ -79,40 +61,40 @@ void dibujar_dado(int x, int y)
 	switch (y)
 	{
 	case 1:
-		gotoxy(5 + offset_x, 2); putchar(254); //medio
-		gotoxy(7 + offset_x, 3); printf(" "); //espacio
+		gotoxy(7 + offset_x, 3); putchar(254); //medio
+		gotoxy(9 + offset_x, 4); printf(" "); //espacio
 		break;
 	case 2:
-		gotoxy(3 + offset_x, 1); putchar(254); //punto izquierdo alto
-		gotoxy(7 + offset_x, 3); putchar(254); //punto derecho bajo
+		gotoxy(5 + offset_x, 2); putchar(254); //punto izquierdo alto
+		gotoxy(9 + offset_x, 4); putchar(254); //punto derecho bajo
 		break;
 
 	case 3:
-		gotoxy(3 + offset_x, 1); putchar(254); //punto izquierdo alto
-		gotoxy(5 + offset_x, 2); putchar(254); //medio
-		gotoxy(7 + offset_x, 3); putchar(254); //punto derecho bajo
+		gotoxy(5 + offset_x, 2); putchar(254); //punto izquierdo alto
+		gotoxy(7 + offset_x, 3); putchar(254); //medio
+		gotoxy(9 + offset_x, 4); putchar(254); //punto derecho bajo
 		break;
 
 	case 4:
-		gotoxy(3 + offset_x, 1); putchar(254); //punto izquierdo alto
-		gotoxy(3 + offset_x, 3); putchar(254); //punto izquierdo bajo
-		gotoxy(7 + offset_x, 1); putchar(254); //punto derecho alto
-		gotoxy(7 + offset_x, 3); putchar(254); //punto derecho bajo
+		gotoxy(5 + offset_x, 2); putchar(254); //punto izquierdo alto
+		gotoxy(5 + offset_x, 4); putchar(254); //punto izquierdo bajo
+		gotoxy(9 + offset_x, 2); putchar(254); //punto derecho alto
+		gotoxy(9 + offset_x, 4); putchar(254); //punto derecho bajo
 		break;
 	case 5:
-		gotoxy(3 + offset_x, 1); putchar(254); //punto izquierdo alto
-		gotoxy(3 + offset_x, 3); putchar(254); //punto izquierdo bajo
-		gotoxy(5 + offset_x, 2); putchar(254); //medio
-		gotoxy(7 + offset_x, 1); putchar(254); //punto derecho alto
-		gotoxy(7 + offset_x, 3); putchar(254); //punto derecho bajo
+		gotoxy(5 + offset_x, 2); putchar(254); //punto izquierdo alto
+		gotoxy(5 + offset_x, 4); putchar(254); //punto izquierdo bajo
+		gotoxy(7 + offset_x, 3); putchar(254); //medio
+		gotoxy(9 + offset_x, 2); putchar(254); //punto derecho alto
+		gotoxy(9 + offset_x, 4); putchar(254); //punto derecho bajo
 		break;
 	case 6:
-		gotoxy(3 + offset_x, 1); putchar(254); //punto izquierdo alto
-		gotoxy(3 + offset_x, 2); putchar(254); //punto izquierdo medio
-		gotoxy(3 + offset_x, 3); putchar(254); //punto izquierdo bajo
-		gotoxy(7 + offset_x, 1); putchar(254); //punto derecho alto
-		gotoxy(7 + offset_x, 2); putchar(254); //punto derecho medio
-		gotoxy(7 + offset_x, 3); putchar(254); //punto derecho bajo
+		gotoxy(5 + offset_x, 2); putchar(254); //punto izquierdo alto
+		gotoxy(5 + offset_x, 3); putchar(254); //punto izquierdo medio
+		gotoxy(5 + offset_x, 4); putchar(254); //punto izquierdo bajo
+		gotoxy(9 + offset_x, 2); putchar(254); //punto derecho alto
+		gotoxy(9 + offset_x, 3); putchar(254); //punto derecho medio
+		gotoxy(9 + offset_x, 4); putchar(254); //punto derecho bajo
 		break;
 	default:
 		break;
@@ -292,7 +274,7 @@ int tirar_dados(int total_score_round)
 		}
 
 		if (sextet_win) {
-			system("CLS"); dibujar_marco_interfaz();
+			system("CLS"); dibujar_ui(15);
 			cout << "TE SALIÓ UN SEXTETO!!!" << endl;
 			cout << "██╗    ██╗██╗███╗   ██╗███╗   ██╗███████╗██████╗" << endl;
 			cout << "██║    ██║██║████╗  ██║████╗  ██║██╔════╝██╔══██╗" << endl;
@@ -322,7 +304,7 @@ int tirar_dados(int total_score_round)
 //JUEGO
 int main()
 {
-	system("CLS"); dibujar_marco_interfaz();
+	system("CLS"); dibujar_ui(15);
 
 	int gamemode; 
 	char res; 
@@ -342,7 +324,7 @@ int main()
 	cout << "\n██████╔╝██║███████╗███████╗    ██║ ╚═╝ ██║██║███████╗";
 	cout << "\n╚═════╝ ╚═╝╚══════╝╚══════╝    ╚═╝     ╚═╝╚═╝╚══════╝";
 	*/
-	system("CLS"); dibujar_marco_interfaz();
+	system("CLS"); dibujar_ui(15);
 	gotoxy(2, 2);
 	cout << "1 - Juego nuevo para un jugador" << endl;
 	gotoxy(2, 3);
@@ -357,7 +339,7 @@ int main()
 	switch (gamemode) {
 	case 1:
 		//--Interfaz --
-		system("CLS"); dibujar_marco_interfaz();
+		system("CLS"); dibujar_ui(15);
 		gotoxy(2, 2);
 		cout << "Nombre? " << endl;
 		gotoxy(2, 3);
@@ -374,7 +356,7 @@ int main()
 			round_number++;
 		} while (res == 's' || total_score_round == 10000 || total_score_round != 0);
 
-		system("CLS"); dibujar_marco_interfaz();
+		system("CLS"); dibujar_ui(15);
 		gotoxy(40, 10);
 		cout << name << endl;
 		gotoxy(35, 13);
@@ -385,14 +367,14 @@ int main()
 
 		// 1º Player
 		system("CLS");
-		dibujar_marco_interfaz();
+		dibujar_ui(15);
 		gotoxy(2, 2);
 		cout << "Nombre del primer jugador? " << endl;
 		gotoxy(2, 3);
 		cin >> name;
 		// 2º Player
 		system("CLS");
-		dibujar_marco_interfaz();
+		dibujar_ui(15);
 		gotoxy(2, 2);
 		cout << "Nombre del segundo jugador? " << endl;
 		gotoxy(2, 3);
@@ -432,7 +414,7 @@ int main()
 		// Condicion de un ciclo para repetir el juego
 		break;
 	default:
-		system("CLS"); dibujar_marco_interfaz();
+		system("CLS"); dibujar_ui(15);
 		gotoxy(2, 2);
 		std::cout << "El modo ingresado no es válido. : ) Adios";
 
