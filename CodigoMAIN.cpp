@@ -408,6 +408,7 @@ int main()
 				cout << "\nLanzamiento " << lanzamiento;
 				tirar_dados(0);
 				total_points_1 = tirar_dados(total_score_round);
+				if (total_points_1 == 10000)break;
 				cout << "\nJugar de vuelta? S/N\n";
 				cin >> res; res = tolower(res);
 			} while (res != 's');
@@ -420,6 +421,7 @@ int main()
 				cout << "\nLanzamiento " << lanzamiento;
 				tirar_dados(0);
 				total_points_2 = tirar_dados(total_score_round);
+				if (total_points_2 == 10000)break;
 				cout << "\nJugar de vuelta? S/N\n";
 				cin >> res; res = tolower(res);
 			} while (res != 's');
