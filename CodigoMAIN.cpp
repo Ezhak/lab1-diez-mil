@@ -37,18 +37,19 @@ void dibujar_marco(int x)
 
 void dibujar_marco_interfaz() {
 	for (int i = 2; i < 100; i++) {
-		gotoxy(i, 1); printf("%c", 205);
-		gotoxy(i, 30); printf("%c", 205);
+		gotoxy(i, 1); putchar(205);
+		gotoxy(i, 30); putchar(205);
 	};
 	for (int i = 2; i < 30; i++) {
-		gotoxy(1, i); printf("%c", 186);
-		gotoxy(100, i); printf("%c", 186);
+		gotoxy(1, i); putchar(186);
+		gotoxy(100, i); putchar(186);
 	};
 	
-	gotoxy(1, 1); printf("%c", 201);
-	gotoxy(1, 30); printf("%c", 200);
-	gotoxy(100, 1); printf("%c", 187);
-	gotoxy(100, 30); printf("%c", 188);
+	gotoxy(1, 1); putchar(201);
+	gotoxy(1, 30); putchar( 200);
+	gotoxy(100, 1); putchar(187);
+	gotoxy(100, 30); putchar(188);
+	// Posicionamiento del cursor fuera del marco del juego
 	gotoxy(2, 2);
 }
 
@@ -108,7 +109,7 @@ void test_game_1_game_5(bool game_1, bool game_5) {
 		cout << "Tambien conseguiste un juego de cincos! Pero estos puntos no se cuentan." << "\n";
 	}
 }
-void tirar_dados()
+int tirar_dados(int total_score_round)
 {
 	//srand(time(NULL));  // Init randomizer
 	//// Setup ONCE
@@ -154,7 +155,6 @@ void tirar_dados()
 	// Puntajes
 	int total_score = 0;
 	bool sextet_win = false;
-	int total_score_round = 0; // Variable que se agrego para acumular los puntos en caso de que no se continue lanzando
 
 	// Aux
 	int number;
@@ -268,7 +268,7 @@ void tirar_dados()
 				cout << x;
 			total_score_round = 0;
 
-			return;
+			return total_score_round;
 		}
 
 		if (sextet_win) {
@@ -280,7 +280,8 @@ void tirar_dados()
 			cout << "██║███╗██║██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗" << endl;
 			cout << "╚███╔███╔╝██║██║ ╚████║██║ ╚████║███████╗██║  ██║" << endl;
 			cout << "╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝" << endl;
-			return;
+			total_score_round = 10000;
+			return total_score_round;
 		}
 
 		else {
@@ -295,17 +296,24 @@ void tirar_dados()
 		}
 	}
 	total_score_round += total_score;
-	gotoxy(1, 11);
-	cout << "Numero de Ronda: " << endl;
-	gotoxy(25, 12);
-	cout << "| Puntaje Acumulado al momento: " << total_score_round << endl;
+	return total_score_round;
 }
 
 //JUEGO
 int main()
 {
 	system("CLS"); dibujar_marco_interfaz();
-	int gamemode; char res; char name[20]; char name2[20];
+
+	int gamemode; 
+	char res; 
+	string name; 
+	string name2;
+	int total_score_round = 0; 
+	int round_number = 1;
+	int lanzamiento = 0;
+	int total_points_1 = 0;
+	int total_points_2 = 0;
+
 	/*
 	cout << "\n██████╗ ██╗███████╗███████╗    ███╗   ███╗██╗██╗";
 	cout << "\n██╔══██╗██║██╔════╝╚══███╔╝    ████╗ ████║██║██║";
@@ -319,11 +327,9 @@ int main()
 	cout << "1 - Juego nuevo para un jugador" << endl;
 	gotoxy(2, 3);
 	cout << "2 - Juego nuevo para dos jugadores" << endl;
-	gotoxy(2, 4);
-	cout << "3 - Mostrar puntuación más alta" << endl;
-	gotoxy(2, 8);
+	gotoxy(2, 7);
 	cout << "Modo de juego ? " << endl;
-	gotoxy(2, 9);
+	gotoxy(2, 8);
 	cin >> gamemode;
 	cin.clear();
 	cin.ignore(256, '\n');
@@ -337,51 +343,74 @@ int main()
 		gotoxy(2, 3);
 		cin >> name;
 		system("CLS");
+
 		do {
+			if (total_score_round == 0) round_number = 0;
 			system("CLS");
-			tirar_dados();
+			total_score_round = tirar_dados(total_score_round);
 			gotoxy(0, 12);
-			cout << "Nombre de Jugador: " << name << endl;
+			cout << "Turno de: " << name << " | " << "Ronda " << round_number << " | " << total_score_round;
 			cout << "\nJugar de vuelta? S/N\n";
 			cin >> res; res = tolower(res);
-		} while (res == 's');
+			round_number++;
+		} while (res == 's' || total_score_round == 10000);
+
 		system("CLS"); dibujar_marco_interfaz();
 		gotoxy(40, 10);
 		cout << name << endl;
 		gotoxy(35, 13);
-		cout << "PUNTAJE TOTAL: "<<endl;
+		cout << "PUNTAJE TOTAL: " << total_score_round << endl;
 		
 		break;
 	case 2:
-		system("CLS"); dibujar_marco_interfaz();
+
+		// 1º Player
+		system("CLS");
+		dibujar_marco_interfaz();
 		gotoxy(2, 2);
 		cout << "Nombre del primer jugador? " << endl;
 		gotoxy(2, 3);
 		cin >> name;
-		system("CLS"); dibujar_marco_interfaz();
+		// 2º Player
+		system("CLS");
+		dibujar_marco_interfaz();
 		gotoxy(2, 2);
 		cout << "Nombre del segundo jugador? " << endl;
 		gotoxy(2, 3);
 		cin >> name2;
 		system("CLS");
+
+		do {
+			lanzamiento = 0;
+			do {
+				system("CLS");
+				lanzamiento++;
+				cout << "Turno de: " << name << " | " << "Ronda " << round_number << " | Puntaje total: " << total_points_1;
+				cout << "------------------------------";
+				cout << "Lanzamiento " << lanzamiento;
+				tirar_dados(0);
+				total_points_1 = tirar_dados(total_score_round);
+				cout << "\nJugar de vuelta? S/N\n";
+				cin >> res; res = tolower(res);
+			} while (res != 's');
+			lanzamiento = 0;
+			do {
+				system("CLS");
+				lanzamiento++;
+				cout << "Turno de: " << name2 << " | " << "Ronda " << round_number << " | Puntaje total: " << total_points_2;
+				cout << "------------------------------";
+				cout << "Lanzamiento " << lanzamiento;
+				tirar_dados(0);
+				total_points_2 = tirar_dados(total_score_round);
+				cout << "\nJugar de vuelta? S/N\n";
+				cin >> res; res = tolower(res);
+			} while (res != 's');
+			round_number++;
+		} while (round_number <= 10 || (total_points_1 == 10000) || (total_points_2 == 10000));
+
+
 		// Funcion de juego de 2 jugadores
 		// Condicion de un ciclo para repetir el juego
-		break;
-	case 3: // Puntajes totales de las partidas hasta el momento
-		system("CLS"); dibujar_marco_interfaz();
-		gotoxy(2, 2);
-		cout << "Lista de puntajes: " << endl;
-		gotoxy(2, 3);
-		cout << " 1- " << "\t\t\t\t\tPuntos: " << "" << endl;
-		gotoxy(2, 4);
-		cout << " 2- " << "\t\t\t\t\tPuntos: " << "" << endl;
-		gotoxy(2, 5);
-		cout << " 3- " << "\t\t\t\t\tPuntos: " << "" << endl;
-		gotoxy(2, 6);
-		cout << " 4- " << "\t\t\t\t\tPuntos: " << "" << endl;
-		gotoxy(2, 7);
-		cout << " 5- " << "\t\t\t\t\tPuntos: " << "" << endl;
-		gotoxy(2, 8);
 		break;
 	default:
 		system("CLS"); dibujar_marco_interfaz();
