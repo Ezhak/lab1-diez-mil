@@ -1,5 +1,5 @@
 #include "game.h"
-
+// Prototipo de Menu, incluyendolo en CodigoMAIN.cpp este archivo deberia de ser borrado
 void main_menu()
 {
     std::cout << "\n██████╗ ██╗███████╗███████╗    ███╗   ███╗██╗██╗";
