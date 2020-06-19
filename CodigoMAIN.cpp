@@ -21,17 +21,17 @@ void gotoxy(int x, int y)
 
 void dibujar_ui(int x)
 {
-	for (int i = 2; i < 63; i++)
+	for (int i = 2; i < 80; i++)
 	{
 		gotoxy(i, 0); putchar(205); //lado arriba
 		gotoxy(i, x); putchar(205); //lado abajo
 	}
 	gotoxy(1, 0); putchar(201); //esquina arriba izquierda
-	gotoxy(63, 0); putchar(187); //esquina arriba derecha
+	gotoxy(80, 0); putchar(187); //esquina arriba derecha
 	for (int i = 1; i < x; i++)
 	{
 		gotoxy(1, i); putchar(186); //lado izquierdo
-		gotoxy(63, i); putchar(186); //lado derecho
+		gotoxy(80, i); putchar(186); //lado derecho
 	}
 	gotoxy(1, x); putchar(200); //esquina abajo izquierdo
 	gotoxy(63, x); putchar(188); //esquina abajo derecho
