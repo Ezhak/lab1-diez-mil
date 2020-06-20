@@ -620,7 +620,7 @@ int main()
 		else winner = name2;
 
 		system("CLS");
-		dibujar_ui(17, 32);
+		dibujar_ui(18, 32);
 		gotoxy(3, 3); cout << "---------------------------";
 		gotoxy(3, 4); cout << "GANADOR " << winner;
 		gotoxy(3, 5); cout << "---------------------------";
@@ -632,7 +632,8 @@ int main()
 		gotoxy(4, 12); cout << "Puntos totales: " << total_score_2;
 		gotoxy(3, 13); cout << "---------------------------";
 		gotoxy(3, 14); cout << "Tiro mas alto: " << high_score;
-		gotoxy(3, 15); cout << "---------------------------";
+		gotoxy(3, 15); cout << "Rondas transcurridas: " << turnos;
+		gotoxy(3, 16); cout << "---------------------------";
 		break;
 	default:
 		gotoxy(2, 16);
