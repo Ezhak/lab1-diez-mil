@@ -107,6 +107,17 @@ int tirar_dados()
 
 	vector<int> partial_scores; // Para chequear cual es el puntaje mas grande
 
+	if (sextet) {
+		cout << "TE SALIÓ UN SEXTETO!!!" << endl;
+		cout << "██╗    ██╗██╗███╗   ██╗███╗   ██╗███████╗██████╗" << endl;
+		cout << "██║    ██║██║████╗  ██║████╗  ██║██╔════╝██╔══██╗" << endl;
+		cout << "██║ █╗ ██║██║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝" << endl;
+		cout << "██║███╗██║██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗" << endl;
+		cout << "╚███╔███╔╝██║██║ ╚████║██║ ╚████║███████╗██║  ██║" << endl;
+		cout << "╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝" << endl;
+		return PUNTAJE_MAXIMO;
+	}
+
 	if (game_1)
 		partial_scores.push_back(100 * times[0]);
 	if (game_5)
@@ -115,74 +126,52 @@ int tirar_dados()
 			partial_scores.push_back(2000);
 			gotoxy(3, 6);
 			cout << "Conseguiste un trío ampliado! +2000\n";
-		}
-
-		else if (long_ladder == 6) {
-			partial_scores.push_back(1500);
-			gotoxy(3, 6);
-			cout << "Conseguiste una escalera larga! +1500\n";
-		}
-
-		else if (triple_par) {
-			partial_scores.push_back(1000);
-			gotoxy(3, 6);
-			cout << "Conseguiste un triple par! +1000\n";
-		}
-
-		else if (trio_xplus) {
-			partial_scores.push_back(number * 200);
-			gotoxy(3, 6);
-			cout << "Conseguiste un trio ampliado de " << number << "! +" << number * 200 << "\n";
-			test_game_1_game_5(game_1, game_5);
-		}
-
-		else if (trio) {
-			partial_scores.push_back(1000);
-			gotoxy(3, 6);
-			cout << "Conseguiste un trio! +1000\n";
-			test_game_1_game_5(game_1, game_5);
-		}
-
-		else if (trio_x) {
-			partial_scores.push_back(number * 100);
-			gotoxy(3, 6);
-			cout << "Conseguiste un trio de " << number << "! +" << number * 100 << "\n";
-			test_game_1_game_5(game_1, game_5);
-		}
-
-		else if (game_1) {
-			gotoxy(3, 6);
-			cout << "Conseguiste un juego de unos! +" << times[0] * 100 << "\n";
-		}
-
-		else if (game_5) {
-			gotoxy(3, 6);
-			cout << "Conseguiste un juego de cincos! +" << times[4] * 50 << "\n";
-		}
-
-		else {
-			gotoxy(3, 6);
-			cout << "No conseguiste ninguna combinacion.\n";
-			return 0;
-		}
-
-		if (sextet) {
-			cout << "TE SALIÓ UN SEXTETO!!!" << endl;
-			cout << "██╗    ██╗██╗███╗   ██╗███╗   ██╗███████╗██████╗" << endl;
-			cout << "██║    ██║██║████╗  ██║████╗  ██║██╔════╝██╔══██╗" << endl;
-			cout << "██║ █╗ ██║██║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝" << endl;
-			cout << "██║███╗██║██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗" << endl;
-			cout << "╚███╔███╔╝██║██║ ╚████║██║ ╚████║███████╗██║  ██║" << endl;
-			cout << "╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝" << endl;
-			return PUNTAJE_MAXIMO;
-		}
-
-		else {
-			sort(partial_scores.begin(), partial_scores.end());
-			total_score += partial_scores[(partial_scores.size() - 1)];
-			cout << endl;
-		}
 	}
+	else if (long_ladder == 6) {
+		partial_scores.push_back(1500);
+		gotoxy(3, 6);
+		cout << "Conseguiste una escalera larga! +1500\n";
+	}
+	else if (triple_par) {
+		partial_scores.push_back(1000);
+		gotoxy(3, 6);
+		cout << "Conseguiste un triple par! +1000\n";
+	}
+	else if (trio_xplus) {
+		partial_scores.push_back(number * 200);
+		gotoxy(3, 6);
+		cout << "Conseguiste un trio ampliado de " << number << "! +" << number * 200 << "\n";
+		test_game_1_game_5(game_1, game_5);
+	}
+	else if (trio) {
+		partial_scores.push_back(1000);
+		gotoxy(3, 6);
+		cout << "Conseguiste un trio! +1000\n";
+		test_game_1_game_5(game_1, game_5);
+	}
+	else if (trio_x) {
+		partial_scores.push_back(number * 100);
+		gotoxy(3, 6);
+		cout << "Conseguiste un trio de " << number << "! +" << number * 100 << "\n";
+		test_game_1_game_5(game_1, game_5);
+	}
+	else if (game_1) {
+		gotoxy(3, 6);
+		cout << "Conseguiste un juego de unos! +" << times[0] * 100 << "\n";
+	}
+	else if (game_5) {
+		gotoxy(3, 6);
+		cout << "Conseguiste un juego de cincos! +" << times[4] * 50 << "\n";
+	}
+	else {
+		gotoxy(3, 6);
+		cout << "No conseguiste ninguna combinacion.\n";
+		return 0;
+	}
+
+	sort(partial_scores.begin(), partial_scores.end());
+	total_score += partial_scores[(partial_scores.size() - 1)];
+	cout << endl;
 	return total_score;
 }
 
